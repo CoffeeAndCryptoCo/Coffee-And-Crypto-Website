@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Coffee, CoffeeIcon, Bitcoin, Menu, X } from 'lucide-react';
+import { Coffee, CoffeeIcon, Bitcoin, Menu, X, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { coffeeBlends } from '../data/coffeeBlends';
 import CryptoTicker from '../components/CryptoTicker';
@@ -18,6 +18,7 @@ function Home() {
     { name: 'Coffee Club', path: '/subscribe' },
     { name: 'Rewards', path: '/rewards' },
     { name: 'Brew Paper', path: '/brew-paper' },
+    { name: 'Exclusive Access', path: '/exclusive' },
     { name: 'Event Booking', action: () => setIsEventModalOpen(true) },
   ];
 
@@ -73,9 +74,11 @@ function Home() {
                       }
                       setIsMenuOpen(false);
                     }}
-                    className="w-full text-left px-4 sm:px-6 py-2 sm:py-3 text-amber-100 hover:text-amber-400 hover:bg-black/40 transition-colors text-sm sm:text-base"
-                    className="w-full text-left px-4 sm:px-6 py-2 sm:py-3 text-luxe-cream hover:text-gold hover:bg-black transition-colors text-sm sm:text-base"
+                    className={`w-full text-left px-4 sm:px-6 py-2 sm:py-3 text-luxe-cream hover:text-gold hover:bg-black transition-colors text-sm sm:text-base flex items-center gap-2 ${
+                      item.name === 'Exclusive Access' ? 'border-t border-luxe-cream/20' : ''
+                    }`}
                   >
+                    {item.name === 'Exclusive Access' && <Lock className="w-4 h-4 text-gold" />}
                     {item.name}
                   </button>
                 ))}
@@ -104,6 +107,32 @@ function Home() {
             <p className="text-responsive-md text-luxe-cream/90 text-shadow max-w-2xl mx-auto px-4">
               Where blockchain meets exceptional coffee. Pre-order your coffee today and mint your limited NFT to unlock PERKS.
             </p>
+          </motion.div>
+
+          {/* Exclusive Access CTA */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <div className="glass-card p-6 sm:p-8 rounded-2xl max-w-2xl mx-auto">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Lock className="w-8 h-8 text-gold" />
+                <h2 className="text-2xl sm:text-3xl font-bold text-luxe-cream">Unlock Exclusive Access</h2>
+              </div>
+              <p className="text-luxe-cream/90 mb-6">
+                Get access to secret recipes, wholesale pricing, and our private community. 
+                Pay with crypto and save 10%!
+              </p>
+              <motion.button
+                onClick={() => navigate('/exclusive')}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-gold to-emerald-green text-luxe-cream font-bold py-3 px-8 rounded-full text-lg hover:from-emerald-green hover:to-gold transition-all shadow-lg"
+              >
+                Explore Exclusive Content
+              </motion.button>
+            </div>
           </motion.div>
 
           {/* Featured Coffee Section */}
@@ -288,6 +317,10 @@ function Home() {
                 <ul className="space-y-2 sm:space-y-3">
                   <li><a href="/login" className="text-luxe-cream/70 hover:text-gold transition-colors text-sm sm:text-base">Account Login</a></li>
                   <li><a href="https://discord.gg/gaBCj5XYgb" target="_blank" rel="noopener noreferrer" className="text-luxe-cream/70 hover:text-gold transition-colors text-sm sm:text-base">Join Our Discord</a></li>
+                  <li><a href="/exclusive" className="text-gold hover:text-gold/80 transition-colors text-sm sm:text-base flex items-center gap-1">
+                    <Lock className="w-3 h-3" />
+                    Exclusive Access
+                  </a></li>
                 </ul>
                 
                 {/* Community Message */}

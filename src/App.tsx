@@ -6,6 +6,9 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import RefundPolicy from './pages/RefundPolicy';
 import TermsOfService from './pages/TermsOfService';
+import ExclusiveAccess from './pages/ExclusiveAccess';
+import PaymentSuccess from './pages/PaymentSuccess';
+import PaymentCancel from './pages/PaymentCancel';
 
 function App() {
   return (
@@ -17,6 +20,9 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/exclusive" element={<ExclusiveAccess />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
+        <Route path="/payment/cancel" element={<PaymentCancel />} />
       </Routes>
     </Router>
   );
